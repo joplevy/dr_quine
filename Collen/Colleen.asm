@@ -1,57 +1,23 @@
-section	.text
-    global _start
+DEFAULT REL
+section .data
 
-nl_print:
-	mov	ecx, tild ;letter to write
-    int 0x80
-	mov	ecx, bslash ;letter to write
-    int 0x80
-	mov	ecx, nline ;letter to write
-    jmp end_loop
+msg:    db      "DEFAULT REL%1$csection .data%1$c%1$cmsg:    db      %2$c%s%2$c, 10, 0%1$cnl:     db      0x0a%1$cquote:  db      0x22%1$c%1$csection .text%1$cglobal _main%1$cextern _printf%1$c%1$c_main:%1$c    push rbp%1$c    mov rdi, msg%1$c    mov rsi, [nl]%1$c    mov rax, 0%1$c    call _printf%1$c%1$c    mov     rax, 0x2000001 ; exit%1$c    mov     rdi, 0%1$c    syscall", 10, 0
+nl:     db      0x0a
+quote:  db      0x22
 
-normal_print:
-	mov ecx, esi ;letter to write
-    jmp end_loop
+section .text
+global _main
+extern _printf
 
-my_loop:
-	mov	eax, 4	;system call number (sys_write)
-	mov	ebx, 1	;file descriptor (stdout)
-	mov	edx, 1	;message length
-    cmp esi, tild; <== comparaison ici
-    je nl_print
-    jmp normal_print
-end_loop:
-	int	0x80
-    inc word [ptr]
-    inc esi
-    cmp word [ptr], len
-    jle my_loop
-    jmp _end
+_main:
+    push rbp
+    mov rdi, msg
+    mov rsi, [nl]
+    mov rdx, [quote]
+    mov rcx, msg
+    mov rax, 0
+    call _printf
 
-_start:
-    mov [ptr], word 0
-    mov esi, msg
-    jmp my_loop
-
-_end:
-	mov	eax, 1
-	int	0x80
-
- 
-
-section	.data
-
-msg     db  'text de tst~\
-toto'
-
-nline   db  10
-att     db  64
-bslash  db  92
-tild    db  126
-quote   db  34
-
-len     equ $ - msg
-
-section .bss
-
-ptr: resw 1
+    mov     rax, 0x2000001 ; exit
+    mov     rdi, 0
+    syscall
