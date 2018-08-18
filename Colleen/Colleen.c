@@ -38,9 +38,15 @@ void ft_output(){~\
 		st_ptr++;~\
 	}~\
 }~\
+/*~\
+** outside comment~\
+*/~\
 ~\
 int 	main()~\
 {~\
+	/*~\
+	** inside comment~\
+	*/~\
 	ft_output();~\
 	return(0);~\
 }~\
@@ -78,9 +84,15 @@ int 	main()~\
 		st_ptr++;
 	}
 }
+/*
+** outside comment
+*/
 
 int 	main()
 {
+	/*
+	** inside comment
+	*/
 	ft_output();
 	return(0);
 }
