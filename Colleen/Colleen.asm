@@ -11,19 +11,9 @@ extern _printf
 
 _main:
     push rbp
-
-; mov rbp, rsp
-; mov rcx, 30
-; setup:
-; push 10
-; dec rcx
-; cmp rcx, 0
-; je print
-; jmp setup
-; print:
-; add dword [rsp], 24 ; lol
-; add dword [rsp + 144], 49
-
+    mov rbp, rsp
+    sub rsp, 16
+    
     lea rdi, [msg]
     mov ebx, 1
     mov rsi, [nl]
@@ -31,7 +21,7 @@ _main:
     lea rcx, [msg]
     mov rax, 0
     call _printf
-pop rbp
+; pop rbp
 leave
 ret
     ; mov     rax, 0x2000001 ; exit
