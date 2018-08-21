@@ -22,7 +22,7 @@ OBJ_NAME_C = $(C_NAME:.c=.o)
 OBJ_NAME_G = $(G_NAME:.c=.o)
 OBJ_NAME_S = $(S_NAME:.c=.o)
 TRASH = tmp_Colleen \
-		Grace_kid.c
+		Grace_kid.c \
 		Sully_*
 RM = rm -f
 
@@ -49,9 +49,9 @@ $(NAME_S): $(OBJ_NAME_S)
 	@echo "  Well done"
 
 clean:
-	@$(RM) $(OBJ_NAME_C) $(OBJ_NAME_G) $(TRASH)
+	@$(RM) $(OBJ_NAME_C) $(OBJ_NAME_G) $(OBJ_NAME_S) $(TRASH)
 
 fclean: clean
-	@$(RM) $(NAME_C) $(NAME_G)
+	@$(RM) $(NAME_C) $(NAME_G) $(NAME_S)
 
 re: fclean all
